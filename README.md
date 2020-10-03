@@ -1,8 +1,11 @@
 # Django Study
 
-## command
+참고한 블로그 및 github
 
----
+[DarrenKwonDev 블로그](https://darrengwon.tistory.com/category/python%2C%20Selenium%2C%20Django/%F0%9F%94%AB%20Django)  
+[멋쟁이사자처럼 Django 정리 github](https://github.com/LikeLionSCH/LikeLion_Django_Study_Summary)
+
+## command
 
 - 가상 환경 구성 및 실행 후 django 설치  
   python -m venv .venv  
@@ -26,12 +29,12 @@
   python manage.py migrate
 
 <br/>
-<br/>
+
+---
+
 <br/>
 
 ## tips
-
----
 
 - app 관리  
   [app].apps.config를 project/settings.py에 추가
@@ -50,7 +53,9 @@
   `admin.site.register(models.Blog)`  
   데코레이터를 활용하는 방법도 있음
 
-- 가장 간단한 Queryset
+- 가장 간단한 형태의 Queryset  
+  단순히 model을 불러와서 objects로 Manager를 가져와
+  적절한 메서드를 사용하면 된다.
 
 ```
 from django.shortcuts import render
