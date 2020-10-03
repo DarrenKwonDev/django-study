@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog</title>
+  </head>
+  <style>
+    .date {
+      font-size: 8px;
+      color: rgba(0, 0, 0, 0.5);
+    }
+  </style>
+  <body>
+    {% include "partials/nav.html"%}
+    <h2>
+      {{blog.title}}
+      <div class="date">{{blog.pub_date}}</div>
+    </h2>
+
+    <div>{{blog.body}}</div>
+  </body>
+</html>

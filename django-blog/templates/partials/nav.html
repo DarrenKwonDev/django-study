@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<style>
+  nav {
+    height: 150px;
+    background: rgb(52,58,64);
+    color: rgb(71, 70, 70);
+  }
+  a {
+    text-decoration: none;
+  }
+</style>
+<body>
+
+  <nav>
+    <span>
+      <a href={% url 'home' %}>Home</a>
+    </span>
+    <span>
+      <a href={% url 'new' %}>글쓰기</a>
+    </span>
+  </nav>
+</body>
+
+</html>

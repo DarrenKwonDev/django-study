@@ -61,6 +61,53 @@
 from django.shortcuts import render
 from . import models
 def home(request):
+    # 모델을 불러와 objects로 Manager 호출
     blogs = models.Blog.objects.all()
     return render(request, "home.html", {"blogs": blogs})
+```
+
+- 모델 클래스에 정의한 메서드와 속성은 queryset 객체들이 사용 가능
+
+```
+class Blog(models.Model):
+    title = models.CharField(max_length=200)
+    pub_date = models.DateTimeField("date published")
+    body = models.TextField()
+
+    def summary(self):
+        return self.body[:100]
+```
+
+위와 같은 모델이 있다면 쿼리셋 객체들은 title, pub_date, body 속성을 가지고 있으며 summary라는 메서드를 사용할 수 있게 된다. 이를 템플릿에서 사용하면 다음과 같다.
+
+```
+<div class="chunk">
+  <div class="upperChunk">
+    <h2 class="title">{{blog.title}}</h2>
+    <h5 class="date">{{blog.pub_date}}</h5>
+  </div>
+  <div class="downChunk">{{blog.summary}}
+    <a href={% url 'detail' blog.id %}> ...more </a>
+  </div>
+</div>
+```
+
+- path converter
+
+여러 객체들을 다루는, 계층적인 url을 자동 생성할 때 유리  
+`<type : 변수이름>` 꼴로 사용함.
+공식 문서에 따르면 type으로 str, int, slug, uuid 가능함.
+자세한 내용은 [공식 문서](https://docs.djangoproject.com/en/3.1/topics/http/urls/)
+
+```
+# project/url.py에 path converter 활용
+path('blog/<int:blog_id>', blog.views.detail, name="detail")
+
+# app/views.py에서 함수의 인자로 사용
+from django.shortcuts import render, get_object_or_404
+
+def detail(request, blog_id):
+    blog_detail = get_object_or_404(models.Blog, pk=blog_id)
+
+    return render(request, "detail.html", {"blog": blog_detail})
 ```
