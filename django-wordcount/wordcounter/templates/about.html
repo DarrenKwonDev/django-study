@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/about.css" />
+    <title>WordCounter</title>
+  </head>
+  <style>
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .title {
+      width: 100%;
+      text-align: center;
+      font-weight: 600;
+      font-size: 3rem;
+    }
+  </style>
+  <body>
+    <div class="wrapper">
+      <div class="title">about</div>
+      <a href="{% url 'home'  %}">Home</a>
+    </div>
+  </body>
+</html>
