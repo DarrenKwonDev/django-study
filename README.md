@@ -2,7 +2,7 @@
 
 참고한 블로그 및 github
 
-[DarrenKwonDev 블로그](https://darrengwon.tistory.com/category/python%2C%20Selenium%2C%20Django/%F0%9F%94%AB%20Django)  
+[DarrenKwonDev 블로그(본인 블로그)](https://darrengwon.tistory.com/category/python%2C%20Selenium%2C%20Django/%F0%9F%94%AB%20Django)  
 [멋쟁이사자처럼 Django 정리 github](https://github.com/LikeLionSCH/LikeLion_Django_Study_Summary)
 
 ## command
@@ -13,10 +13,12 @@
   python install django
 
 - 프로젝트 생성 및 구동  
-  django-admin startproject [이름]
+  django-admin startproject [이름]  
+  [구성되는 파일의 역할](https://darrengwon.tistory.com/343?category=879979)
 
 - 앱 만들기  
-  python manage.py startapp [app 이름]
+  python manage.py startapp [app 이름]  
+  [구성되는 파일의 역할](https://darrengwon.tistory.com/343?category=879979)
 
 - 실행  
   python manage.py runserver
@@ -55,7 +57,8 @@
 
 - 가장 간단한 형태의 Queryset  
   단순히 model을 불러와서 objects로 Manager를 가져와
-  적절한 메서드를 사용하면 된다.
+  적절한 메서드를 사용하면 된다.  
+  모델 관계를 이용한 Queryset과 좀 더 자세한 Queryset 정보는 [여기로](https://darrengwon.tistory.com/352?category=879979)
 
 ```
 from django.shortcuts import render
@@ -92,7 +95,7 @@ class Blog(models.Model):
 </div>
 ```
 
-- path converter
+- [path converter](https://darrengwon.tistory.com/478)
 
 여러 객체들을 다루는, 계층적인 url을 자동 생성할 때 유리  
 `<type : 변수이름>` 꼴로 사용함.
