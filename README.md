@@ -158,3 +158,9 @@ STATICFILES_DIRS = [
 # 사용 예시
 <img class="card-img-top" src="{% static 'Poster.png' %}" alt="" />
 ```
+
+| static                                                                   | media                                            |
+| ------------------------------------------------------------------------ | ------------------------------------------------ |
+| 정적 파일은 어디에 뒀나요 `STATICFILES_DIRS`                             | x                                                |
+| 정적 파일을 보려면 어느 경로로 `STATIC_URL`                              | 업로드한 이미지를 보려면 어느 경로로 `MEDIA_URL` |
+| 어디로 모을지(static을 app 별로 분리해서 관리할 때만 사용) `STATIC_ROOT` | 어디로 모을지 `MEDIA_ROOT`                       |
