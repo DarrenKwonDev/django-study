@@ -1,29 +1,24 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>portfolio</title>
-  </head>
-  <body>
-    <a href="#"
-      ><img class="card-img-top" src="{% static 'Poster.png' %}" alt=""
-    /></a>
-    {% for portfolio in portfolios.all %}
-    <div class="col-lg-6 portfolio-item">
-      <div class="card h-100">
-        <a href="#"
-          ><img class="card-img-top" src="{{ portfolio.image.url }}" alt=""
-        /></a>
-        <div class="card-body">
-          <h4 class="card-title">
-            <a href="#"> {{ portfolio.title }} </a>
-          </h4>
-          <p class="card-text">{{ portfolio.description }}</p>
-        </div>
+{% extends 'base.html' %}{% block contents %} {% load static %}
+
+<body>
+  <a href="#"
+    ><img class="card-img-top" src="{% static 'Poster.png' %}" alt=""
+  /></a>
+  {% for portfolio in portfolios.all %}
+  <div class="col-lg-6 portfolio-item">
+    <div class="card h-100">
+      <a href="#"
+        ><img class="card-img-top" src="{{ portfolio.image.url }}" alt=""
+      /></a>
+      <div class="card-body">
+        <h4 class="card-title">
+          <a href="#"> {{ portfolio.title }} </a>
+        </h4>
+        <p class="card-text">{{ portfolio.description }}</p>
       </div>
     </div>
-    {% endfor %}
-  </body>
-</html>
+  </div>
+  {% endfor %}
+</body>
+
+{% endblock %}

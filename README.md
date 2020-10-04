@@ -186,3 +186,10 @@ def portfolio(request):
 | 정적 파일은 어디에 뒀나요 `STATICFILES_DIRS`                             | x                                                |
 | 정적 파일을 보려면 어느 경로로 `STATIC_URL`                              | 업로드한 이미지를 보려면 어느 경로로 `MEDIA_URL` |
 | 어디로 모을지(static을 app 별로 분리해서 관리할 때만 사용) `STATIC_ROOT` | 어디로 모을지 `MEDIA_ROOT`                       |
+
+<br />
+
+### 템플릿 상속 및 url 관리
+
+[like lion](https://github.com/LikeLionSCH/LikeLion_Django_Study_Summary/blob/master/Summary/1st_Week_4/1st_Week_4_7.md)  
+[블로그](https://darrengwon.tistory.com/469?category=879979)

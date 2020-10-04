@@ -1,63 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog</title>
-  </head>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-    .list {
-    }
-    .chunk {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+{% extends 'base.html' %} {% block contents %}
 
-      text-align: left;
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  .chunk {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-      width: 50vw;
+    text-align: left;
 
-      margin: 6px;
-      padding: 1em;
+    width: 50vw;
 
-      border: none;
-      border-radius: 6px;
-      box-shadow: 0px 2px 6px 0 rgba(0, 0, 0, 0.2);
+    margin: 6px;
+    padding: 1em;
 
-      transition: transform 0.5s ease-in-out;
-    }
-    .chunk:hover {
-      transform: translateY(-2px);
-      box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
-    }
-    .upperChunk {
-      display: flex;
-      align-items: center;
-      width: 100%;
-    }
-    .downChunk {
-      width: 100%;
-    }
-    .date {
-      margin-left: 1rem;
-    }
-  </style>
-  <body>
-    {% include "partials/nav.html"%}
-    <div>home</div>
-    <ul class="list">
-      {% for blog in blogs %}
-      <div class="chunk">
-        <div class="upperChunk">
-          <h2 class="title">{{blog.title}}</h2>
-          <h5 class="date">{{blog.pub_date}}</h5>
-        </div>
-        <div class="downChunk">{{blog.summary}} <a href={% url 'detail' blog.id %}> ...more </a></div>
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0px 2px 6px 0 rgba(0, 0, 0, 0.2);
+
+    transition: transform 0.5s ease-in-out;
+  }
+  .chunk:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+  }
+  .upperChunk {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  .downChunk {
+    width: 100%;
+  }
+  .date {
+    margin-left: 1rem;
+  }
+  .more {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  .more:hover {
+    color: rgba(0, 0, 0, 0.6);
+
+  }
+</style>
+<body>
+  <div>home</div>
+  <ul class="list">
+    {% for blog in blogs %}
+    <div class="chunk">
+      <div class="upperChunk">
+        <h2 class="title">{{blog.title}}</h2>
+        <h5 class="date">{{blog.pub_date}}</h5>
       </div>
-      {% endfor %}
-    </ul>
-  </body>
-</html>
+      <div class="downChunk">{{blog.summary}} <a class="more" href={% url 'detail' blog.id %}> ...more </a></div>
+    </div>
+    {% endfor %}
+  </ul>
+</body>
+{% endblock %}
