@@ -40,18 +40,21 @@
 
 ## tips
 
-- app 관리  
-  [app].apps.config를 project/settings.py에 추가
+### app 관리
 
-- url 패턴  
-  project/urls.py에서 path를 추가하자.  
-  해당 app의 views.py에 있는 특정 함수를 두번 쨰 인자로 지정하고
-  템플릿에서 쉽게 사용하기 위해 name을 지정합시다.
-  `urlpatterns = [path("admin/", admin.site.urls), path("", app_view.home, name="home")]`
+[app].apps.config를 project/settings.py에 추가
 
-- templates 일원화  
-  각 app에서 templates 폴더 생성하기보다 templates는 일원화하자. 이를 위해서 project/setting.py에서 template의 DIRS를
-  `os.path.join(BASE_DIR, "templates")`로 수정하자
+### url 패턴
+
+project/urls.py에서 path를 추가하자.  
+ 해당 app의 views.py에 있는 특정 함수를 두번 쨰 인자로 지정하고
+템플릿에서 쉽게 사용하기 위해 name을 지정합시다.
+`urlpatterns = [path("admin/", admin.site.urls), path("", app_view.home, name="home")]`
+
+### templates 일원화
+
+각 app에서 templates 폴더 생성하기보다 templates는 일원화하자. 이를 위해서 project/setting.py에서 template의 DIRS를
+`os.path.join(BASE_DIR, "templates")`로 수정하자
 
 - model.py를 admin.py에 등록
   `admin.site.register(models.Blog)`  
@@ -71,7 +74,7 @@ def home(request):
     return render(request, "home.html", {"blogs": blogs})
 ```
 
-- 모델 클래스에 정의한 메서드와 속성은 queryset 객체들이 사용 가능
+### 모델 클래스에 정의한 메서드와 속성은 queryset 객체들이 사용 가능
 
 ```
 class Blog(models.Model):
@@ -97,7 +100,7 @@ class Blog(models.Model):
 </div>
 ```
 
-- [path converter](https://darrengwon.tistory.com/478)
+### [path converter](https://darrengwon.tistory.com/478)
 
 여러 객체들을 다루는, 계층적인 url을 자동 생성할 때 유리  
 `<type : 변수이름>` 꼴로 사용함.
@@ -117,7 +120,7 @@ def detail(request, blog_id):
     return render(request, "detail.html", {"blog": blog_detail})
 ```
 
-- static 파일 서빙하기
+### static 파일 서빙하기
 
 [공식문서](https://docs.djangoproject.com/en/3.1/howto/static-files/)
 
