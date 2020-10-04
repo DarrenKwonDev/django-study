@@ -5,6 +5,9 @@
 [DarrenKwonDev 블로그(본인 블로그)](https://darrengwon.tistory.com/category/python%2C%20Selenium%2C%20Django/%F0%9F%94%AB%20Django)  
 [멋쟁이사자처럼 Django 정리 github](https://github.com/LikeLionSCH/LikeLion_Django_Study_Summary)
 
+[cdrf](http://www.cdrf.co/) : Django REST Framework  
+[ccbv](https://ccbv.co.uk/) : Class-Based Views
+
 ## command
 
 - 가상 환경 구성 및 실행 후 django 설치  
@@ -193,3 +196,11 @@ def portfolio(request):
 
 [like lion](https://github.com/LikeLionSCH/LikeLion_Django_Study_Summary/blob/master/Summary/1st_Week_4/1st_Week_4_7.md)  
 [블로그](https://darrengwon.tistory.com/469?category=879979)
+
+### local login/logout
+
+dfdf
+
+### Django Form
+
+[django girls](https://tutorial.djangogirls.org/ko/django_forms/)

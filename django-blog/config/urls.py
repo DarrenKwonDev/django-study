@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from blog import views as blog_views
 from portfolio import views as portfolio_views
+from accounts import views as accounts_views
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -28,6 +29,8 @@ urlpatterns = [
     path("blog/new", blog_views.new, name="new"),
     path("blog/create", blog_views.create, name="create"),
     path("portfolio", portfolio_views.portfolio, name="portfolio"),
+    path("accounts/signup/", accounts_views.signup, name="signup"),
+    path("accounts/login/", accounts_views.login, name="login"),
 ]
 
 # config/settings.py의 DEBUG가 True일 때만 작동
