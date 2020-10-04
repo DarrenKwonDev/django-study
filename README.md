@@ -197,10 +197,7 @@ def portfolio(request):
 [like lion](https://github.com/LikeLionSCH/LikeLion_Django_Study_Summary/blob/master/Summary/1st_Week_4/1st_Week_4_7.md)  
 [블로그](https://darrengwon.tistory.com/469?category=879979)
 
-### local login/logout
+### Django Form API
 
-dfdf
-
-### Django Form
-
+[블로그](https://darrengwon.tistory.com/579?category=879979)  
 [django girls](https://tutorial.djangogirls.org/ko/django_forms/)
