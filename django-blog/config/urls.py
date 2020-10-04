@@ -18,6 +18,9 @@ from django.urls import path
 from blog import views as blog_views
 from portfolio import views as portfolio_views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", blog_views.home, name="home"),
@@ -26,3 +29,7 @@ urlpatterns = [
     path("blog/create", blog_views.create, name="create"),
     path("portfolio", portfolio_views.portfolio, name="portfolio"),
 ]
+
+# config/settings.py의 DEBUG가 True일 때만 작동
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

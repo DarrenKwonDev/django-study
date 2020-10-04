@@ -159,6 +159,28 @@ STATICFILES_DIRS = [
 <img class="card-img-top" src="{% static 'Poster.png' %}" alt="" />
 ```
 
+### Meida
+
+```
+project/settings.py에 추가
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+```
+
+```
+# ImageField로 media 파일을 받을 수 있음
+image = models.ImageField(upload_to="images/")
+```
+
+```
+# views 단에서 적절히 가공 후 보여줌
+def portfolio(request):
+    portfolios = models.Portfolio.objects
+    return render(request, "portfolio.html", {"portfolios": portfolios})
+```
+
+### static vs media
+
 | static                                                                   | media                                            |
 | ------------------------------------------------------------------------ | ------------------------------------------------ |
 | 정적 파일은 어디에 뒀나요 `STATICFILES_DIRS`                             | x                                                |
