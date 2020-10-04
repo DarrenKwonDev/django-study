@@ -194,8 +194,37 @@ def portfolio(request):
 
 ### 템플릿 상속 및 url 관리
 
+`{% include "partials/nav.html"%}`
+`{% block contents %} {% endblock %}`
+
 [like lion](https://github.com/LikeLionSCH/LikeLion_Django_Study_Summary/blob/master/Summary/1st_Week_4/1st_Week_4_7.md)  
 [블로그](https://darrengwon.tistory.com/469?category=879979)
+
+### name와 namespace, app_name을 활용한 계층적 url 관리
+
+project/urls.py
+
+```
+from django.contrib import admin
+from django.urls import path, include
+
+
+urlpatterns = [
+  ...
+  path("users/", include("users.urls", namespace="users")),
+]
+
+```
+
+app/urls.py  
+여기서 **app_name은 config/urls.py에 지정한 namespace와 같은 이름이어야 합니다.**
+
+```
+app_name = "users"
+
+urlpatterns = [path("login", views.LoginView.as_view(), name="login")]
+
+```
 
 ### Django Form API
 
