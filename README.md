@@ -12,6 +12,11 @@
   .\ .venv\Scripts\activate  
   python install django
 
+- vscode에서 python interpreter를 설정한 가상환경으로 잡아주기  
+  `ctrl + shift + P`  
+  `Python: Select Interpreter` 선택  
+  사용하고자 하는 가상 환경에서 마련한 인터프리터를 선택
+
 - 프로젝트 생성 및 구동  
   django-admin startproject [이름]  
   [구성되는 파일의 역할](https://darrengwon.tistory.com/343?category=879979)
@@ -31,9 +36,6 @@
   python manage.py migrate
 
 <br/>
-
----
-
 <br/>
 
 ## tips
@@ -113,4 +115,43 @@ def detail(request, blog_id):
     blog_detail = get_object_or_404(models.Blog, pk=blog_id)
 
     return render(request, "detail.html", {"blog": blog_detail})
+```
+
+- static 파일 서빙하기
+
+[공식문서](https://docs.djangoproject.com/en/3.1/howto/static-files/)
+
+필요에 따라 각각의 Django App마다 App별 정적 파일을 담는 별도의 "static" 폴더를 둘 수도 있지만
+관리를 편하기 하기 위해 최상위 경로에 static 폴더를 만들기로 함.
+
+만약 App 별로 static 폴더를 만들어 관리하는 방법을 선택했다면
+STATIC_ROOT를 지정한 후 python manage.py collectstatic 명령을 사용해야 한다.
+
+1. project/settings.py에서 STATIC_URL, STATICFILES_DIRS 지정
+
+```
+# STATIC_URL : {% static '경로' %}가 '/static/경로' 로 바뀌게 됨
+STATIC_URL = '/static/'
+
+# STATICFILES_DIRS : static이 어디에 있는지 static 경로 지정.
+# 우리는 최상위 경로에 static을 만들어 줬으므로 다음과 같이 작성
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+```
+
+2. static 파일 사용
+
+최상단에 static 로드
+
+- {% load staticfiles %} and {% load admin_static %} were deprecated in Django 2.1, and removed in Django 3.0.
+
+`{% load static %}`
+
+사용  
+`{% static 'STATIC_URL 이후의 경로' %}`
+
+```
+# 사용 예시
+<img class="card-img-top" src="{% static 'Poster.png' %}" alt="" />
 ```
