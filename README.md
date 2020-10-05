@@ -5,8 +5,11 @@
 [DarrenKwonDev 블로그(본인 블로그)](https://darrengwon.tistory.com/category/python%2C%20Selenium%2C%20Django/%F0%9F%94%AB%20Django)  
 [멋쟁이사자처럼 Django 정리 github](https://github.com/LikeLionSCH/LikeLion_Django_Study_Summary)
 
+유용한 사이트 및 extension
+
 [cdrf](http://www.cdrf.co/) : Django REST Framework  
-[ccbv](https://ccbv.co.uk/) : Class-Based Views
+[ccbv](https://ccbv.co.uk/) : Class-Based Views  
+[django-debug-toolbar](https://github.com/jazzband/django-debug-toolbar)
 
 ## command
 
@@ -38,8 +41,7 @@
   python manage.py makemigrations  
   python manage.py migrate
 
-<br/>
-<br/>
+<br />
 
 ## tips
 
@@ -68,7 +70,7 @@ project/urls.py에서 path를 추가하자.
   적절한 메서드를 사용하면 된다.  
   모델 관계를 이용한 Queryset과 좀 더 자세한 Queryset 정보는 [여기로](https://darrengwon.tistory.com/352?category=879979)
 
-```
+```python
 from django.shortcuts import render
 from . import models
 def home(request):
@@ -79,7 +81,7 @@ def home(request):
 
 ### 모델 클래스에 정의한 메서드와 속성은 queryset 객체들이 사용 가능
 
-```
+```python
 class Blog(models.Model):
     title = models.CharField(max_length=200)
     pub_date = models.DateTimeField("date published")
@@ -91,7 +93,7 @@ class Blog(models.Model):
 
 위와 같은 모델이 있다면 쿼리셋 객체들은 title, pub_date, body 속성을 가지고 있으며 summary라는 메서드를 사용할 수 있게 된다. 이를 템플릿에서 사용하면 다음과 같다.
 
-```
+```python
 <div class="chunk">
   <div class="upperChunk">
     <h2 class="title">{{blog.title}}</h2>
@@ -110,7 +112,7 @@ class Blog(models.Model):
 공식 문서에 따르면 type으로 str, int, slug, uuid 가능함.
 자세한 내용은 [공식 문서](https://docs.djangoproject.com/en/3.1/topics/http/urls/)
 
-```
+```python
 # project/url.py에 path converter 활용
 path('blog/<int:blog_id>', blog.views.detail, name="detail")
 
@@ -135,7 +137,7 @@ STATIC_ROOT를 지정한 후 python manage.py collectstatic 명령을 사용해�
 
 1. project/settings.py에서 STATIC_URL, STATICFILES_DIRS 지정
 
-```
+```python
 # STATIC_URL : {% static '경로' %}가 '/static/경로' 로 바뀌게 됨
 STATIC_URL = '/static/'
 
@@ -157,25 +159,25 @@ STATICFILES_DIRS = [
 사용  
 `{% static 'STATIC_URL 이후의 경로' %}`
 
-```
+```python
 # 사용 예시
 <img class="card-img-top" src="{% static 'Poster.png' %}" alt="" />
 ```
 
 ### Meida
 
-```
+```python
 project/settings.py에 추가
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 ```
 
-```
+```python
 # ImageField로 media 파일을 받을 수 있음
 image = models.ImageField(upload_to="images/")
 ```
 
-```
+```python
 # views 단에서 적절히 가공 후 보여줌
 def portfolio(request):
     portfolios = models.Portfolio.objects
@@ -204,29 +206,87 @@ def portfolio(request):
 
 project/urls.py
 
-```
+```python
 from django.contrib import admin
 from django.urls import path, include
-
 
 urlpatterns = [
   ...
   path("users/", include("users.urls", namespace="users")),
 ]
-
 ```
 
 app/urls.py  
 여기서 **app_name은 config/urls.py에 지정한 namespace와 같은 이름이어야 합니다.**
 
+```python
+app_name = "users";
+
+urlpatterns = [path("login", views.LoginView.as_view(), (name = "login"))];
 ```
-app_name = "users"
 
-urlpatterns = [path("login", views.LoginView.as_view(), name="login")]
+템플릿에서 활용시 url "namespace:name" 꼴로 사용
 
+```python
+<a href="{% url "users:login" %}">Login</a>
 ```
 
 ### Django Form API
 
+```python
+from django import forms
+
+class LoginForm(forms.Form):
+
+    email = forms.EmailField()
+    # passwordField는 없습니다
+    password = forms.CharField()
+```
+
+작성한 form은 views.py에서 불러온 다음
+템플릿으로 전달하면 됩니다.
+
+```python
+from . import forms
+
+# Create your views here.
+class LoginView(View):
+    def get(self, request):
+        form = forms.LoginForm()
+        return render(request, "users/login.html", {"form": form})
+```
+
+템플릿 context로 전달한 form은 form 태그로 감싸는 것을 잊지 맙시다!
+
+```python
+<form method="POST" action="{% url "users:login" %}">
+  {{form.as_ul}}
+  <button>Login</button>
+</form>
+```
+
+Form Validation을 위한 claen 메서드 등의 자세한 내용은 아래 참고  
 [블로그](https://darrengwon.tistory.com/579?category=879979)  
 [django girls](https://tutorial.djangogirls.org/ko/django_forms/)
+
+### 로그인, 로그아웃, authentication
+
+django.contrib.auth에서 제공하는 authenticate, login, logout 을 이용해 손쉽게 로그인/아웃, 유저 검증을 할 수 있다.
+
+django의 인증 시스템에 관해서는 [공식문서](https://docs.djangoproject.com/en/3.1/topics/auth/default/#using-the-django-authentication-system)를 참고하자.
+
+또한, ID와 비밀번호를 입력하는 부분에 CSRF 공격을 방지하기 위해 다음 코드를 템플릿에 추가해줘야 한다. 하지 않으면 403 Forbidden을 받는다.  
+`{% csrf_token %}`
+
+유저 인증 체크는 user의 is_authenticated 속성을 이용한다.
+
+```
+{% if user.is_authenticated %}
+  <li><a href="{% url "users:logout" %}">Log out</a></li>
+{% else %}
+  <li><a href="{% url "users:login" %}">Log in</a></li>
+{% endif %}
+```
+
+자세한 사용 예는 다음 블로그에 정리해두었다.  
+[블로그](https://darrengwon.tistory.com/868)
